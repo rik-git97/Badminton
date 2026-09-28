@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+  /* Design tokens. CourtVision is dark by design (brief), so the palette is identical in every scheme. */
+  :root {
+    --bg:#050B08; --surface:#0B1410; --surface-2:#12201A; --line:#1E3129;
+    --ink:#EAF5EE; --mute:#86A094; --lime:#CCFF33; --volt:#FFE14A; --danger:#FF5F5F; --court:#0E2A1F;
+    color-scheme: dark;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#050B08; } }
+  :root[data-theme="dark"] { --bg:#050B08; }
+  *, *::before, *::after { box-sizing: inherit; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  html, body { background: var(--bg); color: var(--ink); margin: 0; }
+  body { font-family: Manrope, ui-sans-serif, system-ui, sans-serif; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+  body::before {
+    content:""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background:
+      radial-gradient(900px 500px at 85% -10%, rgba(204,255,51,.07), transparent 60%),
+      radial-gradient(700px 400px at -10% 110%, rgba(255,225,74,.05), transparent 60%);
+  }
+  #root { position: relative; z-index: 1; }
+  :focus-visible { outline: 2px solid var(--lime); outline-offset: 2px; border-radius: 6px; }
+  .scroll-x { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .scroll-x::-webkit-scrollbar { height: 6px; } .scroll-x::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
+  .tabular { font-variant-numeric: tabular-nums; }
+  @keyframes pulse-dot { 0%,100% { opacity: 1 } 50% { opacity: .25 } }
+  .live-dot { animation: pulse-dot 1.2s ease-in-out infinite; }
+  @keyframes pop { 0% { transform: scale(1) } 40% { transform: scale(1.12) } 100% { transform: scale(1) } }
+  .pop { animation: pop .22s ease-out; }
+  @keyframes toast-in { from { transform: translateY(12px); opacity: 0 } to { transform: none; opacity: 1 } }
+  .toast-in { animation: toast-in .2s ease-out; }
+  @media (prefers-reduced-motion: reduce) { .live-dot, .pop, .toast-in { animation: none !important; } }
+  input::placeholder { color: #5b7368; }
